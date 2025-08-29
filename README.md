@@ -1,1 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ColourGharplus — Ghar Painting</title>
+<style>
+  :root{
+    --bg:#ffffff; --text:#0f172a; --muted:#6b7280;
+    --accent:#0ea5a4; --card:#f8fafb; --radius:12px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+  header{position:sticky;top:0;background:linear-gradient(90deg,rgba(255,255,255,0.98),rgba(255,255,255,0.95));backdrop-filter:blur(6px);border-bottom:1px solid #eef2f7;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;z-index:10}
+  .brand{display:flex;gap:10px;align-items:center;font-weight:700}
+  .logo-dot{width:40px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#d4a017);box-shadow:0 6px 18px rgba(14,165,164,0.12)}
+  nav a{margin-left:10px;text-decoration:none;color:var(--muted);font-size:15px}
+  main{padding-bottom:90px}
+  .hero{padding:18px}
+  .hero h1{margin:0 0 8px;font-size:20px}
+  .hero p{margin:0;color:var(--muted)}
+  .cta{margin-top:12px;display:flex;gap:10px}
+  .btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;background:var(--accent);color:#fff;font-weight:600}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(14,165,164,0.12)}
+  .section{padding:16px}
+  .card{background:var(--card);padding:12px;border-radius:10px;margin-bottom:12px;box-shadow:0 4px 12px rgba(2,6,23,0.03)}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .gallery img{width:100%;height:160px;object-fit:cover;border-radius:8px;display:block}
+  h2{margin:0 0 8px;font-size:18px}
+  p.muted{color:var(--muted);margin:0 0 12px}
+  .contact a{display:inline-block;margin-right:10px;margin-top:8px;text-decoration:none;color:var(--accent);padding:8px 10px;border-radius:8px;border:1px solid rgba(14,165,164,0.12)}
+  form input, form select, form textarea{width:100%;padding:10px;margin:6px 0 12px;border:1px solid #e6edf3;border-radius:8px}
+  .small{font-size:13px;color:var(--muted)}
+  footer{position:fixed;left:0;right:0;bottom:0;padding:10px 12px;background:#fff;border-top:1px solid #eef2f7;text-align:center;font-size:13px}
+  /* Lightbox */
+  .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;padding:20px;z-index:40}
+  .lightbox img{max-width:95%;max-height:85%;border-radius:10px}
+  .close{position:absolute;right:20px;top:18px;color:#fff;font-size:22px}
+  /* admin modal */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;padding:12px;z-index:50}
+  .modal .box{background:#fff;padding:14px;border-radius:10px;max-width:720px;width:100%;max-height:80vh;overflow:auto}
+  table{width:100%;border-collapse:collapse}
+  table th, table td{padding:8px;border:1px solid #f1f5f9;font-size:13px;text-align:left}
+  /* responsive */
+  @media(min-width:800px){ .grid{grid-template-columns:repeat(4,1fr)} .gallery img{height:140px} }
+</style>
+</head>
+<body>
 
+<header>
+  <div class="brand">
+    <div class="logo-dot" aria-hidden="true"></div>
+    <div><strong>Colour</strong>Gharplus</div>
+  </div>
+  <nav aria-label="Main nav">
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+    <a href="#join">Join</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero section" id="home">
+    <h1>Ghar Painting — Simple. Reliable. Budget-friendly.</h1>
+    <p class="muted">Local painters • Colour consultancy • Book via WhatsApp</p>
+    <div class="cta">
+      <a class="btn" href="#join">Join as Painter</a>
+      <a class="btn ghost" href="#contact">Contact</a>
+    </div>
+  </section>
+
+  <section id="about" class="section card">
+    <h2>About</h2>
+    <p class="muted">Experienced painters, trusted service, honest pricing. We specialise in interior & exterior painting, accent walls and textures. Based in Hyderabad — we serve local areas quickly and safely.</p>
+  </section>
+
+  <section id="gallery" class="section">
+    <h2>Gallery</h2>
+    <p class="small">Tap an image to view larger. 10 demo photos below.</p>
+    <div class="grid gallery" id="galleryGrid">
+      <!-- JS will inject images -->
+    </div>
+  </section>
+
+  <section id="contact" class="section card contact">
+    <h2>Contact</h2>
+    <p class="muted">Call, WhatsApp or email — we reply fast.</p>
+    <div>
+      <a href="tel:+918341888700">Call +91 83418 88700</a>
+      <a href="https://wa.me/918341888700?text=Hello%20ColourGharplus%2C%20I%20want%20a%20quote" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:colourgharplus@gmail.com">Email</a>
+    </div>
+  </section>
+
+  <section id="join" class="section card">
+    <h2>Join as Painter</h2>
+    <p class="small">Register quickly — we'll contact you for verification.</p>
+    <form id="painterForm" onsubmit="return false;">
+      <label class="small">Full name</label>
+      <input id="pName" required placeholder="Name" />
+      <label class="small">Phone</label>
+      <input id="pPhone" required placeholder="+91 98xxxxxx" />
+      <label class="small">Area / City</label>
+      <input id="pArea" placeholder="Area, e.g., Toli Chowki" />
+      <label class="small">Specialization</label>
+      <input id="pSpec" placeholder="Interior / Exterior / Textures" />
+      <label class="small">Short note (optional)</label>
+      <textarea id="pNote" rows="3"></textarea>
+      <button id="submitBtn" class="btn">Submit</button>
+      <button id="adminBtn" class="btn ghost" style="margin-left:8px">Admin</button>
+      <p id="formMsg" class="small" style="margin-top:8px"></p>
+    </form>
+  </section>
+
+</main>
+
+<!-- lightbox -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+  <span class="close" onclick="closeLightbox(event)">✕</span>
+  <img id="lightboxImg" src="" alt="Large view" />
+</div>
+
+<!-- admin modal -->
+<div id="adminModal" class="modal" onclick="if(event.target===this) closeAdmin()">
+  <div class="box">
+    <h3>Painter Registrations <small style="float:right"><button onclick="closeAdmin()" class="btn ghost">Close</button></small></h3>
+    <div style="margin:10px 0">
+      <input id="adminPass" placeholder="Enter admin password" style="padding:8px;border-radius:8px;border:1px solid #e6edf3;width:60%" />
+      <button onclick="unlockAdmin()" class="btn" style="margin-left:8px">Unlock</button>
+    </div>
+    <div id="adminContent" style="display:none">
+      <table id="regTable"><thead><tr><th>#</th><th>Name</th><th>Phone</th><th>Area</th><th>Spec</th><th>Note</th></tr></thead><tbody></tbody></table>
+      <div style="margin-top:10px">
+        <button onclick="clearAll()" class="btn ghost">Clear All</button>
+      </div>
+    </div>
+    <p class="small muted" style="margin-top:8px">Admin password is <strong>admin123</strong> (change later).</p>
+  </div>
+</div>
+
+<footer>
+  <small>© ColourGharplus — Phone/WhatsApp: +91 83418 88700</small>
+</footer>
+
+<script>
+/* ========== Gallery images (10) ========== */
+const galleryGrid = document.getElementById('galleryGrid');
+const imgs = [];
+for(let i=1;i<=10;i++){
+  // stable placeholder images using picsum seed
+  imgs.push({src:`https://picsum.photos/seed/colourgh${i}/900/600`, caption:`Photo ${i}`});
+}
+function renderGallery(){
+  galleryGrid.innerHTML = '';
+  imgs.forEach((it,idx)=>{
+    const fig = document.createElement('figure');
+    fig.style.margin=0;
+    const img = document.createElement('img');
+    img.loading='lazy';
+    img.src = it.src;
+    img.alt = it.caption;
+    img.onclick = ()=>openLight(it.src);
+    const cap = document.createElement('figcaption');
+    cap.textContent = it.caption;
+    cap.style.fontSize='13px';
+    cap.style.color='var(--muted)';
+    fig.appendChild(img);
+    fig.appendChild(cap);
+    galleryGrid.appendChild(fig);
+  });
+}
+renderGallery();
+
+/* ========== Lightbox ========== */
+function openLight(src){
+  const lb = document.getElementById('lightbox');
+  const lbimg = document.getElementById('lightboxImg');
+  lbimg.src = src;
+  lb.style.display='flex';
+}
+function closeLightbox(e){
+  if(e){ e.stopPropagation(); }
+  document.getElementById('lightbox').style.display='none';
+  document.getElementById('lightboxImg').src='';
+}
+
+/* ========== Painter form (localStorage) ========== */
+const pForm = document.getElementById('painterForm');
+const msg = document.getElementById('formMsg');
+pForm.addEventListener('click', (ev)=>{
+  if(ev.target.id==='submitBtn'){
+    submitPainter();
+  } else if(ev.target.id==='adminBtn'){
+    openAdmin();
+  }
+});
+function submitPainter(){
+  const name = document.getElementById('pName').value.trim();
+  const phone = document.getElementById('pPhone').value.trim();
+  if(!name || !phone){ msg.textContent='Name & phone required'; return; }
+  const area = document.getElementById('pArea').value.trim();
+  const spec = document.getElementById('pSpec').value.trim();
+  const note = document.getElementById('pNote').value.trim();
+  const entry = {id:Date.now(), name, phone, area, spec, note};
+  const existing = JSON.parse(localStorage.getItem('cg_reg')||'[]');
+  existing.push(entry);
+  localStorage.setItem('cg_reg', JSON.stringify(existing));
+  msg.style.color='green'; msg.textContent='Registration saved. We will contact you soon via WhatsApp.';
+  // clear fields
+  document.getElementById('pName').value=''; document.getElementById('pPhone').value=''; document.getElementById('pArea').value=''; document.getElementById('pSpec').value=''; document.getElementById('pNote').value='';
+  setTimeout(()=>{ msg.textContent=''; msg.style.color=''; },4000);
+}
+
+/* ========== Admin modal & view ========== */
+function openAdmin(){ document.getElementById('adminModal').style.display='flex'; }
+function closeAdmin(){ document.getElementById('adminModal').style.display='none'; document.getElementById('adminContent').style.display='none'; }
+function unlockAdmin(){
+  const pass = document.getElementById('adminPass').value;
+  if(pass === 'admin123'){
+    document.getElementById('adminContent').style.display='block';
+    loadRegs();
+  } else {
+    alert('Wrong password');
+  }
+}
+function loadRegs(){
+  const data = JSON.parse(localStorage.getItem('cg_reg')||'[]');
+  const tbody = document.querySelector('#regTable tbody');
+  tbody.innerHTML='';
+  data.forEach((r,i)=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${i+1}</td><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.phone)}</td><td>${escapeHtml(r.area)}</td><td>${escapeHtml(r.spec)}</td><td>${escapeHtml(r.note)}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+function clearAll(){
+  if(!confirm('Clear all saved registrations?')) return;
+  localStorage.removeItem('cg_reg');
+  loadRegs();
+}
+
+/* small helper */
+function escapeHtml(s){ return (s||'').toString().replace(/[&<>"']/g,c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
+
+/* Smooth scroll for nav links */
+document.querySelectorAll('nav a').forEach(a=>{
+  a.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+
+</body>
+</html>
